@@ -5,40 +5,49 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fff0f5;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-.nav-link{
+
+.nav-link {
   margin-left: 40px;
 }
-#supportHero{
+
+#supportHero {
   background-color: rgb(56, 126, 209);
   color: white;
 }
-#supportWrapper{
+
+#supportWrapper {
   display: flex;
   justify-content: space-between;
   margin: 0 150px;
 }
-#supportHero a{
+
+#supportHero a {
   color: white;
 }
-#supportHero input{
+
+#supportHero input {
   padding: 20px 50px;
   width: 100%;
   font-size: 20px;
   border-radius: 10px;
   border: none;
-}  
-#heading{
+}
+
+#heading {
   margin-bottom: 20px;
 }
-#featured{
+
+#featured {
   padding-left: 370px;
 }
-#featured1{
-  padding-left:290px;
+
+#featured1 {
+  padding-left: 290px;
 }

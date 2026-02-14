@@ -4,7 +4,7 @@ function Navbar() {
     return (
         <nav
             class="navbar navbar-expand-lg border-bottom"
-            style={{ backgroundColor: "#FFF" }}
+            style={{ backgroundColor: "#fff0f5" }}
         >
             <div class="container p-2">
                 <Link class="navbar-brand" to="/">
