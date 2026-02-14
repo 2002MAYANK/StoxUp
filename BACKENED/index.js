@@ -9,14 +9,83 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
+const { UserModel } = require("./model/UserModel");
+
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const cookieParser = require("cookie-parser");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:3001"],
+  credentials: true,
+}));
 app.use(bodyParser.json());
+app.use(cookieParser());
+
+// Secret key for JWT
+const JWT_SECRET = process.env.JWT_SECRET || "your_super_secret_key_123";
+
+app.post("/signup", async (req, res) => {
+  const { email, password, username, mobile } = req.body;
+  // mobile and username are optional due to simple form, but schema might require mobile.
+  // We send dummy mobile from frontend, so it should be fine.
+  // But let's check validation.
+
+  if (!email || !password) {
+    return res.status(400).json({ message: "Email and Password are required" });
+  }
+
+  const existingUser = await UserModel.findOne({ email });
+  if (existingUser) {
+    return res.status(409).json({ message: "User already exists" });
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
+  const newUser = new UserModel({
+    email,
+    password: hashedPassword,
+    username: username || "User",
+    mobile: mobile || "0000000000",
+  });
+
+  try {
+    await newUser.save();
+    const token = jwt.sign({ id: newUser._id }, JWT_SECRET, { expiresIn: "1h" });
+    res.cookie("token", token, { httpOnly: true });
+    res
+      .status(201)
+      .json({ message: "User created successfully", user: newUser });
+  } catch (error) {
+    res.status(500).json({ message: "Error creating user", error });
+  }
+});
+
+app.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  const user = await UserModel.findOne({ email });
+  if (!user) {
+    return res.status(404).json({ message: "User not found" });
+  }
+
+  const isPasswordValid = await bcrypt.compare(password, user.password);
+  if (!isPasswordValid) {
+    return res.status(401).json({ message: "Invalid credentials" });
+  }
+
+  const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: "1h" });
+  res.cookie("token", token, { httpOnly: true });
+  res.json({ message: "Login successful", user: user });
+});
 
 
 // app.get("/addHoldings", async (req, res) => {
@@ -212,7 +281,7 @@ app.post("/newOrder", async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log("App started!");
-    mongoose.connect(uri);
-    console.log("DB started!");
+  console.log("App started!");
+  mongoose.connect(uri);
+  console.log("DB started!");
 });
