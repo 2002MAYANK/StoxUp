@@ -13,23 +13,20 @@ function Team() {
             >
                 <div className="col-6 p-3 text-center">
                     <img
-                        src="media/images/nithinKamath.jpg"
+                        src="media/images/profile use.jpg"
                         style={{ borderRadius: "100%", width: "43%" }}
                     />
-                    <h4 className="mt-5">Nithin Kamath</h4>
-                    <h6>Founder, CEO</h6>
+                    <h4 className="mt-5">MAYANK PATEL</h4>
+                    <h6>Founder</h6>
                 </div>
                 <div className="col-6 p-3">
                     <p>
-                        Nithin bootstrapped and founded StoxUp in 2010 to overcome the
-                        hurdles he faced during his decade long stint as a trader. Today,
-                        StoxUp has changed the landscape of the Indian broking industry.
+                        Mayank built a perosnal project called StoxUp which is inspired by the discount-broking experience clean design, transparent flows, and fast execution screens. It replicates the key building blocks of a modern broker UI: watchlists, instrument search, buy/sell order forms, and portfolio/holdings views.
                     </p>
                     <p>
-                        He is a member of the SEBI Secondary Market Advisory Committee
-                        (SMAC) and the Market Data Advisory Committee (MDAC).
+                        He is a 2nd Year MCA student in IET Lucknow.
                     </p>
-                    <p>Playing basketball is his zen.</p>
+                    <p>He loves doing adventurous activities.</p>
                     <p>
                         Connect on <a href="">Homepage</a> / <a href="">TradingQnA</a> /{" "}
                         <a href="">Twitter</a>

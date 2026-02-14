@@ -5,9 +5,9 @@ function Footer() {
             <div className="container border-top mt-5">
                 <div className="row mt-5">
                     <div className="col">
-                        <img src="media/images/logo.svg" style={{ width: "50%" }} />
+                        <img src="media/images/stoxup logo.png" style={{ width: "50%" }} />
                         <p>
-                            &copy; 2010 - 2024, Not StoxUp Broking Ltd. All rights reserved.
+                            &copy; 2025 - 2026, Not StoxUp Broking Ltd. All rights reserved.
                         </p>
                     </div>
                     <div className="col">
